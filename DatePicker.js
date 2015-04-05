@@ -195,7 +195,8 @@ var DatePicker = function (properties) {
         },
         time: datePicker.time,
         maxdate: datePicker.maxdate,
-        mindate: datePicker.mindate
+        mindate: datePicker.mindate,
+        pageclass: false
     });
     
     
