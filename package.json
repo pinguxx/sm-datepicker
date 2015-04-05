@@ -26,6 +26,6 @@
     "homepage": "https://github.com/pinguxx/sm-datepicker",
     "dependencies": {
         "mithril": "~0.1.30",
-        "sm-calendar": "~0.0.5"
+        "sm-calendar": "~0.0.7"
     }
 }
