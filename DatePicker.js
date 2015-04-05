@@ -286,7 +286,7 @@ var DatePicker = function (properties) {
     datePicker.setValue = function (date) {
         datePicker.displayValue(datePicker.format(date, datePicker.dateformat));
         var cdate = datePicker.value();
-        if ((datePicker.mindate && +cdate < +datePicker.mindate) || (datePicker.maxdate && +cdate > +datePicker.maxdate)) {
+        if (cdate && (datePicker.mindate && +cdate < +datePicker.mindate) || (datePicker.maxdate && +cdate > +datePicker.maxdate)) {
             datePicker.setValue('a');
             datePicker.error('.error');
             return;

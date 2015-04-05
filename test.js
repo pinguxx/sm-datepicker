@@ -28,7 +28,7 @@
     module.vm.init = function () {
         this.dates = m.prop({
             start: m.prop(),
-            end: m.prop(new Date())
+            end: m.prop()
         });
     };
 
