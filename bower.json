@@ -1,0 +1,33 @@
+{
+    "name": "sm-datepicker",
+    "version": "0.0.1",
+    "homepage": "https://github.com/pinguxx/sm-datepicker",
+    "authors": [
+    "Ivan Torres <pinguxx@gmail.com>"
+  ],
+    "description": "mithril semantic-ui datepicker datetimepicker widget",
+    "main": "DatePicker.js",
+    "moduleType": [
+    "node"
+  ],
+    "keywords": [
+    "semantic-ui",
+    "mithril",
+    "datepicker",
+      "date",
+      "calendar",
+      "time"
+  ],
+    "license": "MIT",
+    "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+    "dependencies": {
+        "mithril": "~0.1.30",
+        "sm-calendar": "~0.0.5"
+    }
+}
