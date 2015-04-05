@@ -55,7 +55,7 @@
                 ])
             ]),
             m('.ui.grid.page.form', [
-                m('h2', 'Form datepicker &amp; no time'),
+                m('h2', 'Form datepicker & no time'),
                 m('.row', [
                     m('.ui.column.five.wide', [
                         ctrl.datepicker2.view()

@@ -20,8 +20,9 @@ It is expected for mithril to be in global (m variable) or it will attempt to lo
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.10.3/semantic.min.css">
-    <script src="bower_components/mithril/mithril.js"></script>
-    <script src="Calendar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/0.1.33/mithril.min.js"></script>
+    <script src="https://cdn.rawgit.com/pinguxx/sm-calendar/master/Calendar.js"></script>
+    <script src="DatePicker.js"></script>
 </head>
 
 <body>
@@ -30,106 +31,167 @@ It is expected for mithril to be in global (m variable) or it will attempt to lo
 </body>
 
 </html>
+
 ```
 
 ```JavaScript
-(function (m, Calendar) {
+(function (m, DatePicker) {
     var module = {};
 
 
     module.controller = function () {
         module.vm.init();
+        var ctrl = this;
+        this.datepicker = new DatePicker();
+        this.datepicker2 = new DatePicker({
+            time: false
+        });
+        this.datepicker3 = new DatePicker({
+            placeholder: 'Start Date',
+            onchange: function (date) {
+                ctrl.datepicker4.setMinDate(date);
+            }
+        });
+        this.datepicker4 = new DatePicker({
+            placeholder: 'End Date',
+            onchange: function (date) {
+                ctrl.datepicker3.setMaxDate(date);
+            }
+        });
     };
 
     module.vm = {};
-    module.vm.init = function (data) {
-        this.customers = data;
-        this.rowsperpage = 10;
-        this.filter = m.prop('');
-        this.calendar = new Calendar({
-            mindate: new Date(new Date().getTime() + 10*24*60*60*1000),
-            maxdate: new Date(new Date().getTime() + 30*24*60*60*1000 + 10000000)
+    module.vm.init = function () {
+        this.dates = m.prop({
+            start: m.prop(),
+            end: m.prop(new Date())
         });
-        this.calendar2 = new Calendar({small: true});
     };
 
 
-    module.view = function (/*ctrl*/) {
+    module.view = function (ctrl) {
         return m('', [
             m('.ui.grid.page', [
                 m('br'),
-                m('h1.ui.dividing.header', 'Calendar Widget')
+                m('h1.ui.dividing.header', 'Datepicker Widget')
             ]),
             m('.ui.grid.page', [
-                m('h2', 'Basic Calendar'),
-                module.vm.calendar.view(),
-                m('button.ui..button.primary', {
-                    onclick: function() {
-                        console.log(module.vm.calendar.getDate());
-                    }
-                }, 'get')
+                m('h2', 'Basic Datepicker'),
+                m('.row', [
+                    m('.column.four.wide', [
+                        ctrl.datepicker.view()
+                    ]),
+                    m('.column.two.wide', [
+                        m('button.ui.button.primary', {
+                            onclick: function() {
+                                console.log(ctrl.datepicker.getValue());
+                            }
+                        }, 'get')
+                    ])
+                ])
             ]),
-            m('.ui.grid.page.stackable', [
-                m('h2', 'Small Calendar'),
+            m('.ui.grid.page.form', [
+                m('h2', 'Form datepicker & no time'),
                 m('.row', [
                     m('.ui.column.five.wide', [
-                        m('.ui.grid', [
-                            module.vm.calendar2.view()
+                        ctrl.datepicker2.view()
+                    ]),
+                    m('.column.two.wide', [
+                        m('button.ui.button.primary', {
+                            onclick: function() {
+                                console.log(ctrl.datepicker2.getValue());
+                            }
+                        }, 'get')
+                    ])
+                ])
+            ]),
+            m('.ui.grid.page', [
+                m('h2', 'Max/Min Date, property'),
+                m('.column.sixteen.wide', [
+                    m('.ui.form.fluid', [
+                        m(".two.fields", [
+                            m(".field.required", [
+                                m("label[for='']", "Start Date"),
+                                ctrl.datepicker3.view({
+                                    property: module.vm.dates().start
+                                })
+                            ]),
+                            m(".field.required", [
+                                m("label[for='']", "End Time"),
+                                ctrl.datepicker4.view({
+                                    property: module.vm.dates().end
+                                })
+                            ])
                         ])
                     ])
-                ]),
-                m('button.ui.button.primary', {
-                    onclick: function() {
-                        console.log(module.vm.calendar2.getDate());
-                    }
-                }, 'get')
+                ])
             ])
         ]);
     };
 
     m.module(window.document.body, module);
-}(m, Calendar));
+}(m, DatePicker));
 
 ```
-
+    
 ## Attributes
 It accepts the following properties, all of them are optional
 
  * mindate, min date that can be selected
  * maxdate, max date that can be selected
- * small, boolean, if you want to show a small calendar
- * value, date, current selected date
- * formatCell, function to format the cell, recieves a date object,
+ * property, m.prop date, current date for the attribute
+ * dateformat, function to format the date
  * time, boolean, to display the time
- * onclick, function to react when the cell its clicked, doesnt work if formatcell its passed too
+ * onchange, function to react when the date is changed
  * i18n, object map with:
-    * **monthsLong**, array of string months in a long format `January, February` ...
-    * **months**, array of string months in a small format `Jan, Feb` ...
-    * **daysLong**, array of string days in a long format `Monday, Tuesday` ...
-    * **days**, array of string days in a small format `Mon, Tue` ...
+    * **dayNames**, array of string days, seven for long format, seven for short format `Monday, Tuesday` ... `Mon, Tue`
+    * **monthNames**, array of string months `January, February` ... `Jan, Feb`
     
 
 ## Functions
-Creating a calendar
+Creating a datepicker
 ```JavaScrit
-var calendar = new Calendar({
-    mindate: new Calendar();
-});
+var datePicker = new DatePicker();
 ```
-Loading the view calendar
+
+Loading the view
 ```JavaScrit
-m('div', calendar.view())
+m('div', datePicker.view())
 ```
-You can jump to a date with
+
+Get or set the date
 ```JavaScrit
-calendar.goToDate(date); //date must be a Date object
+datePicker.setValue(date); //date must be a Date object
+datePicker.getValue(date);
 ```
-You can get the seleted date
+
+Update attributes
 ```JavaScrit
-calendar.getDate(); //returns Date object
+datePicker.setProperty(sell.date()); //m.prop attribute
+datePicker.setMaxDate(date);
+datePicker.setMinDate(date);
 ```
-You can set the maxdate and mindate
+
+Display format
+There are some predefined formats for the date, but you can add more
 ```JavaScrit
-calendar.setMaxDate(date);
-calendar.setMinDate(date);
+datePicker.masks = {
+    "default": "ddd mmm dd yyyy HH:MM:ss",
+    shortDate: "m/d/yy",
+    mediumDate: "mmm d, yyyy",
+    longDate: "mmmm d, yyyy",
+    fullDate: "dddd, mmmm d, yyyy",
+    shortTime: "h:MM TT",
+    mediumTime: "h:MM:ss TT",
+    longTime: "h:MM:ss TT Z",
+    isoDate: "yyyy-mm-dd",
+    isoTime: "HH:MM:ss",
+    isoDateTime: "yyyy-mm-dd'T'HH:MM:ss",
+    isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
+};
+```
+
+Date format, you can format a date passing a format to it and optional utc
+```JavaScrit
+datePicker.format(new Date(), "mm/dd/yy HH:MM", utc);
 ```
