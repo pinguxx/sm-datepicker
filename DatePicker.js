@@ -190,8 +190,6 @@ var DatePicker = function (properties) {
     datePicker.calendar = new Calendar({
         small: true,
         onclick: function (date) {
-            /*datePicker.value(date);
-            datePicker.displayValue(datePicker.format(date, datePicker.dateformat));*/
             datePicker.setValue(date);
             datePicker.change();
         },
@@ -267,7 +265,7 @@ var DatePicker = function (properties) {
                 }
             }),
             m('.sm-calendar', {
-                style: 'display:' + datePicker.display() + ';position:absolute;left:4px;top:35px;background-color:#fff;border:1px solid gray;z-index:100;border-radius:0 0 5px 5px;box-shadow:2px 2px 3px gray;min-width:300px;heigth:269px;'
+                style: 'display:' + datePicker.display() + ';position:absolute;left:4px;top:35px;background-color:#fff;border:1px solid gray;z-index:100;border-radius:0 0 5px 5px;box-shadow:2px 2px 3px gray;min-width:300px;'
             }, datePicker.calendar.view()),
             m('button.ui.icon.button', {
                 onclick: function (e) {
