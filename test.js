@@ -39,7 +39,7 @@
                 m('br'),
                 m('h1.ui.dividing.header', 'Datepicker Widget')
             ]),
-            m('.ui.grid.page', [
+            m('.ui.grid.page.stackable', [
                 m('h2', 'Basic Datepicker'),
                 m('.row', [
                     m('.column.four.wide', [
@@ -54,7 +54,7 @@
                     ])
                 ])
             ]),
-            m('.ui.grid.page.form', [
+            m('.ui.grid.page.form.stackable', [
                 m('h2', 'Form datepicker & no time'),
                 m('.row', [
                     m('.ui.column.five.wide', [
