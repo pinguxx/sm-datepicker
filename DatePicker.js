@@ -1,11 +1,11 @@
 /*global require, module, window*/
+'use strict';
 var DatePicker = function (properties) {
-    'use strict';
-
     properties = properties || {};
+    properties['class'] = properties['class'] || 'ui icon button';
 
     var datePicker = {},
-        m = window.m || require("mithril/mithril"),
+        m = window.m || require("mithril"),
         Calendar = window.Calendar || require('sm-calendar'),
         addEvent,
         dateFormat;
@@ -111,7 +111,7 @@ var DatePicker = function (properties) {
                     o: (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
                     S: ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
                 };
-            
+
             datePicker.value(date);
 
             return mask.replace(token, function ($0) {
@@ -162,7 +162,7 @@ var DatePicker = function (properties) {
     datePicker.mindate = properties.mindate || null;
     datePicker.error = m.prop('');
     datePicker.onchange = properties.onchange || null;
-    
+
     datePicker.change = function () {
         datePicker.display('none');
         datePicker.manual = false;
@@ -170,7 +170,7 @@ var DatePicker = function (properties) {
             datePicker.onchange.call(datePicker, datePicker.value());
         }
     };
-    
+
     datePicker.setMaxDate = function (date) {
         datePicker.maxdate = date || null;
         datePicker.calendar.setMaxDate(date);
@@ -178,7 +178,7 @@ var DatePicker = function (properties) {
             datePicker.setValue(datePicker.getValue());
         }
     };
-    
+
     datePicker.setMinDate = function (date) {
         datePicker.mindate = date || null;
         datePicker.calendar.setMinDate(date);
@@ -198,8 +198,8 @@ var DatePicker = function (properties) {
         mindate: datePicker.mindate,
         pageclass: false
     });
-    
-    
+
+
 
     datePicker.view = function (props) {
         props = props || {};
@@ -268,7 +268,8 @@ var DatePicker = function (properties) {
             m('.sm-calendar', {
                 style: 'display:' + datePicker.display() + ';position:absolute;left:4px;top:35px;background-color:#fff;border:1px solid gray;z-index:100;border-radius:0 0 5px 5px;box-shadow:2px 2px 3px gray;min-width:321px;'
             }, datePicker.calendar.view()),
-            m('button.ui.icon.button', {
+            m('button', {
+                class: properties['class'],
                 onclick: function (e) {
                     e.preventDefault();
                     this.previousSibling.previousSibling.focus();
@@ -282,7 +283,7 @@ var DatePicker = function (properties) {
     datePicker.getValue = function () {
         return datePicker.value();
     };
-    
+
     datePicker.setValue = function (date) {
         datePicker.displayValue(datePicker.format(date, datePicker.dateformat));
         var cdate = datePicker.value();
@@ -293,7 +294,7 @@ var DatePicker = function (properties) {
         }
         datePicker.property(datePicker.value());
     };
-    
+
     datePicker.setProperty = function (prop) {
         datePicker.property = prop;
     };
