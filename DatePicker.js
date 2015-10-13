@@ -1,8 +1,8 @@
 /*global require, module, window*/
+'use strict';
 var DatePicker = function (properties) {
-    'use strict';
-
     properties = properties || {};
+    properties['class'] = properties['class'] || 'ui icon button';
 
     var datePicker = {},
         m = window.m || require("mithril"),
@@ -268,7 +268,8 @@ var DatePicker = function (properties) {
             m('.sm-calendar', {
                 style: 'display:' + datePicker.display() + ';position:absolute;left:4px;top:35px;background-color:#fff;border:1px solid gray;z-index:100;border-radius:0 0 5px 5px;box-shadow:2px 2px 3px gray;min-width:321px;'
             }, datePicker.calendar.view()),
-            m('button.ui.icon.button', {
+            m('button', {
+                class: properties['class'],
                 onclick: function (e) {
                     e.preventDefault();
                     this.previousSibling.previousSibling.focus();
