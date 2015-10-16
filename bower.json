@@ -1,6 +1,6 @@
 {
     "name": "sm-datepicker",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "homepage": "https://github.com/pinguxx/sm-datepicker",
     "authors": [
     "Ivan Torres <pinguxx@gmail.com>"
@@ -28,6 +28,6 @@
   ],
     "dependencies": {
         "mithril": "~0.1.30",
-        "sm-calendar": "~0.0.7"
+        "sm-calendar": "~0.1.0"
     }
 }

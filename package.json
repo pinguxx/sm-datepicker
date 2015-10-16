@@ -1,6 +1,6 @@
 {
     "name": "sm-datepicker",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "description": "mithril semantic-ui datepicker datetimepicker widget",
     "main": "DatePicker.js",
     "scripts": {
@@ -26,6 +26,6 @@
     "homepage": "https://github.com/pinguxx/sm-datepicker",
     "dependencies": {
         "mithril": "^0.2.0",
-        "sm-calendar": "~0.0.7"
+        "sm-calendar": "~0.1.0."
     }
 }
