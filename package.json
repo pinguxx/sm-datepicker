@@ -1,6 +1,6 @@
 {
     "name": "sm-datepicker",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "mithril semantic-ui datepicker datetimepicker widget",
     "main": "DatePicker.js",
     "scripts": {

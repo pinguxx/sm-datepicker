@@ -8,8 +8,28 @@
         var ctrl = this;
         this.datepicker = new DatePicker();
         this.datepicker2 = new DatePicker({
-            time: false
+            time: false,
+            i18n: {
+                dayNames: [
+                    "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab",
+                    "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"
+                ],
+                monthNames: [
+                    "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec",
+                    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                ]
+            }
         });
+        /*this.datepicker2.i18n = {
+            dayNames: [
+                "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab",
+                "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"
+            ],
+            monthNames: [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+                "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+            ]
+        };*/
         this.datepicker3 = new DatePicker({
             placeholder: 'Start Date',
             onchange: function (date) {

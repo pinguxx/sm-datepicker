@@ -137,7 +137,7 @@ var DatePicker = function (properties) {
     };
 
     // Internationalization strings
-    datePicker.i18n = {
+    datePicker.i18n = properties.i18n || {
         dayNames: [
             "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
             "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
@@ -196,7 +196,13 @@ var DatePicker = function (properties) {
         time: datePicker.time,
         maxdate: datePicker.maxdate,
         mindate: datePicker.mindate,
-        pageclass: false
+        pageclass: false,
+        i18n: {
+            monthsLong: datePicker.i18n.monthNames.slice(12 , 23),
+            months: datePicker.i18n.monthNames.slice(0 , 12),
+            daysLong: datePicker.i18n.dayNames.slice(7 , 13),
+            days: datePicker.i18n.dayNames.slice(0 , 7)
+        }
     });
 
 
