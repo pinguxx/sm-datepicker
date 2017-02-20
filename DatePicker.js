@@ -220,7 +220,7 @@ var DatePicker = function (properties) {
                         var node = e.target,
                             isInside;
                         isInside = el.contains(node);
-                        if (node.className.indexOf('sm-calendar-arrow') > -1) {
+                        if (typeof node.className === 'string' && node.className.indexOf('sm-calendar-arrow') > -1) {
                             isInside = true;
                         }
                         if (!isInside && datePicker.display() === 'block') {
